@@ -1,4 +1,4 @@
-package com.iashinsergei.notebook.ui
+package com.iashinsergei.notebook.ui.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
