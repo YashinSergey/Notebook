@@ -4,6 +4,7 @@ import android.graphics.Color
 import com.iashinsergei.notebook.data.entity.Note
 
 object NotesRepository {
+
     private val notes = listOf(
         Note(
             "First note",
@@ -37,4 +38,5 @@ object NotesRepository {
         )
     )
 
+    fun getNotes() = notes
 }
