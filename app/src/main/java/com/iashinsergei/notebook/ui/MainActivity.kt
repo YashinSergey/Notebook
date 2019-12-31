@@ -1,10 +1,11 @@
-package com.iashinsergei.notebook
+package com.iashinsergei.notebook.ui
 
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.iashinsergei.notebook.R
 
 class MainActivity : AppCompatActivity() {
 
