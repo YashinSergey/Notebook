@@ -41,6 +41,10 @@ object NotesRepository {
         )
     )
 
+    init {
+        notesLiveData.value = notes
+    }
+
     fun getNotes() = notesLiveData
 
     fun saveNote(note: Note) {
