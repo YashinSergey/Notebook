@@ -31,7 +31,7 @@
     <style name="BlueTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/coral</item>
         <item name="colorPrimaryDark">@color/navy_blue</item>
-        <item name="colorAccent">@color/islamic_green</item>
+        <item name="colorAccent">@color/burnt_orange</item>
     </style>
     <style name="BlueTheme.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -51,5 +51,29 @@
     </style>
     <style name="BrownTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="BrownTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="YellowTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/gorse</item>
+        <item name="colorPrimaryDark">@color/saffron</item>
+        <item name="colorAccent">@color/wild_watermelon</item>
+    </style>
+    <style name="YellowTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="YellowTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="YellowTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="IrisBlueTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/iris_blue</item>
+        <item name="colorPrimaryDark">@color/bondi_blue</item>
+        <item name="colorAccent">@color/medium_slate_blue</item>
+    </style>
+    <style name="IrisBlueTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="IrisBlueTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="IrisBlueTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>
