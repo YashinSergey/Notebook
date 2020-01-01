@@ -76,4 +76,17 @@
     <style name="IrisBlueTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="IrisBlueTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="DarkTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">#3A3841</item>
+        <item name="colorPrimaryDark">#242629</item>
+        <item name="colorAccent">#A0A4D9</item>
+        <item name="android:colorBackground">#27292D</item>
+    </style>
+    <style name="DarkTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="DarkTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="DarkTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>
