@@ -8,7 +8,7 @@
     android:clipToPadding="false"
     android:padding="@dimen/card_view_padding"
     app:cardCornerRadius="@dimen/card_corner_radius"
-    app:cardElevation="@dimen/card_elavation"
+    app:cardElevation="@dimen/card_elevation"
     android:layout_margin="@dimen/card_margin"
     android:backgroundTint="@color/white">
 
