@@ -2,13 +2,14 @@ package com.iashinsergei.notebook.data.entity
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
+import java.util.*
 
 @Parcelize
 data class Note(
     val id: String,
     val title: String,
     val text: String,
-    val color: Color? = Color.IRIS_BLUE_THEME_COLOR
+    val lastChanged: Date = Date()
 ) : Parcelable {
 
     override fun equals(other: Any?): Boolean {
@@ -24,17 +25,7 @@ data class Note(
         var result = id.hashCode()
         result = 31 * result + title.hashCode()
         result = 31 * result + text.hashCode()
-        result = 31 * result + (color?.hashCode() ?: 0)
+        result = 31 * result + lastChanged.hashCode()
         return result
-    }
-    
-    enum class Color {
-        DEFAULT_THEME_COLOR,
-        ORANGE_THEME_COLOR,
-        BLUE_THEME_COLOR,
-        BROWN_THEME_COLOR,
-        YELLOW_THEME_COLOR,
-        IRIS_BLUE_THEME_COLOR,
-        DARK_THEME_COLOR
     }
 }
