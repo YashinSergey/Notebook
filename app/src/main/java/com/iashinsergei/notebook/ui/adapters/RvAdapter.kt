@@ -31,7 +31,6 @@ class RvAdapter: RecyclerView.Adapter<RvAdapter.MyViewHolder>() {
         fun bind(note: Note) = with(itemView) {
             tv_note_title.text = note.title
             tv_note_body.text = note.text
-            setBackgroundColor(note.color)
         }
     }
 }
