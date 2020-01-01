@@ -1,6 +1,7 @@
 package com.iashinsergei.notebook.ui.activities
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -26,17 +27,26 @@ class MainActivity : AppCompatActivity() {
         viewModel.viewState().observe(this, Observer {
             it.let { adapter.notes = it.notes}
         })
+
+        fab.setOnClickListener(fubClickListener())
+    }
+
+    private fun fubClickListener() = View.OnClickListener {
+        NoteActivity.start(this)
     }
 
     private fun initRecyclerView() {
         rec_view_notes.layoutManager = GridLayoutManager(this, 2)
-        adapter = RvAdapter()
+        adapter = RvAdapter{
+            NoteActivity.start(this, it)
+        }
         rec_view_notes.adapter = adapter
     }
 
     private fun initToolbar() {
         setSupportActionBar(toolbar)
         collapsingToolbarLayout.isTitleEnabled = false
-        supportActionBar!!.title = "Notebook"
+        supportActionBar?.title = getString(R.string.app_name)
     }
+
 }
