@@ -4,7 +4,12 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Note(val id: String, val title: String, val text: String, val color: Int?) : Parcelable {
+data class Note(
+    val id: String,
+    val title: String,
+    val text: String,
+    val color: Color? = Color.IRIS_BLUE_THEME_COLOR
+) : Parcelable {
 
     override fun equals(other: Any?): Boolean {
         if(this === other) return true
@@ -19,10 +24,10 @@ data class Note(val id: String, val title: String, val text: String, val color: 
         var result = id.hashCode()
         result = 31 * result + title.hashCode()
         result = 31 * result + text.hashCode()
-        result = 31 * result + (color ?: 0)
+        result = 31 * result + (color?.hashCode() ?: 0)
         return result
     }
-
+    
     enum class Color {
         DEFAULT_THEME_COLOR,
         ORANGE_THEME_COLOR,
