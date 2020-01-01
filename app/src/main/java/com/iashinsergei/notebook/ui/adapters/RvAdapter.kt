@@ -8,7 +8,7 @@ import com.iashinsergei.notebook.R
 import com.iashinsergei.notebook.data.entity.Note
 import kotlinx.android.synthetic.main.note.view.*
 
-class RvAdapter: RecyclerView.Adapter<RvAdapter.MyViewHolder>() {
+class RvAdapter(val onItemClick: ((Note) -> Unit)? = null): RecyclerView.Adapter<RvAdapter.MyViewHolder>() {
 
     var notes: List<Note> = listOf()
         set(value){
@@ -26,12 +26,16 @@ class RvAdapter: RecyclerView.Adapter<RvAdapter.MyViewHolder>() {
     }
 
 
-    class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    inner class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
         fun bind(note: Note) = with(itemView) {
             tv_note_title.text = note.title
             tv_note_body.text = note.text
             //TODO Сделать backgroundTint в соответствии с текущей темой
+
+            itemView.setOnClickListener{
+                onItemClick?.invoke(note)
+            }
         }
     }
 }
