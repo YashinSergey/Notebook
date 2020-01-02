@@ -2,16 +2,16 @@ package com.iashinsergei.notebook.ui.activities
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.iashinsergei.notebook.R
+import com.iashinsergei.notebook.data.entity.Note
 import com.iashinsergei.notebook.ui.adapters.RvAdapter
 import com.iashinsergei.notebook.ui.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.app_bar_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<List<Note>, MainViewModel>() {
 
     lateinit var adapter: RvAdapter
     lateinit var viewModel: MainViewModel
