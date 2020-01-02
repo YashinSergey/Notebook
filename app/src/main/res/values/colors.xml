@@ -5,6 +5,7 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="orange">#ff5722</color>
+    <color name="burnt_orange">#ff6e40</color>
     <color name="cinnabar">#e64a19</color>
     <color name="free_speech_magenta">#e040fb</color>
 
@@ -15,4 +16,15 @@
     <color name="ironstone">#795548</color>
     <color name="very_dark_brown">#5D4037</color>
     <color name="dark_gray">#5F5F5F</color>
+
+    <color name="gorse">#ffeb3b</color>
+    <color name="saffron">#fbc02d</color>
+    <color name="wild_watermelon">#ff5177</color>
+
+    <color name="iris_blue">#00bcd4</color>
+    <color name="bondi_blue">#0097a7</color>
+    <color name="medium_slate_blue">#7c4dff</color>
+
+
+    <color name="white">#FFFFFF</color>
 </resources>

@@ -6,10 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clipToPadding="false"
-    android:padding="8dp"
-    app:cardCornerRadius="6dp"
-    app:cardElevation="8dp"
-    android:layout_margin="4dp">
+    android:padding="@dimen/card_view_padding"
+    app:cardCornerRadius="@dimen/card_corner_radius"
+    app:cardElevation="@dimen/card_elevation"
+    android:layout_margin="@dimen/card_margin"
+    android:backgroundTint="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,9 +21,9 @@
             android:id="@+id/tv_note_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="@dimen/note_title_margin"
+            android:layout_marginTop="@dimen/note_title_margin"
+            android:layout_marginEnd="@dimen/note_title_margin"
             android:textStyle="bold|italic"
             tools:text="Note title example" />
 
@@ -30,7 +31,7 @@
             android:id="@+id/tv_note_body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="@dimen/note_body_margin"
             tools:text="Note body example"/>
     </LinearLayout>
 
