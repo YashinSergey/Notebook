@@ -1,0 +1,93 @@
+{
+  "project_info": {
+    "project_number": "149630547565",
+    "firebase_url": "https://personal-data-app-a2a61.firebaseio.com",
+    "project_id": "personal-data-app-a2a61",
+    "storage_bucket": "personal-data-app-a2a61.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:149630547565:android:e0c0086a041c52994e7164",
+        "android_client_info": {
+          "package_name": "com.example.kotlin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "149630547565-ufgo55d0fr0r2trr88lj5vcv2dslsrlp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kotlin",
+            "certificate_hash": "d5e403bca136f24fcce2999e26d637723e1e6c2b"
+          }
+        },
+        {
+          "client_id": "149630547565-m83lgc4ct0g2ldkaetrerfoh8qvusq1h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kotlin",
+            "certificate_hash": "146ab7f572f7b503497d524e36ba7c891cc1298f"
+          }
+        },
+        {
+          "client_id": "149630547565-fqcqqe49gnih8l50lbhq98s3q1k6n63r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3ITEGS5gKqcXJsAu0ZceXR68iQSsfvpk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "149630547565-fqcqqe49gnih8l50lbhq98s3q1k6n63r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:149630547565:android:81bd1ea63c7536fb4e7164",
+        "android_client_info": {
+          "package_name": "com.iashinsergei.notebook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "149630547565-jte35ou08f5u0kks7tdi6839fcbqlvd6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.iashinsergei.notebook",
+            "certificate_hash": "d5e403bca136f24fcce2999e26d637723e1e6c2b"
+          }
+        },
+        {
+          "client_id": "149630547565-fqcqqe49gnih8l50lbhq98s3q1k6n63r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3ITEGS5gKqcXJsAu0ZceXR68iQSsfvpk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "149630547565-fqcqqe49gnih8l50lbhq98s3q1k6n63r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
