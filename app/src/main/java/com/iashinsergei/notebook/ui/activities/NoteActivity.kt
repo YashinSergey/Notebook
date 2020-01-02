@@ -69,6 +69,8 @@ class NoteActivity : AppCompatActivity() {
             text = et_body.text.toString(),
             lastChanged = Date()
         ) ?: Note(UUID.randomUUID().toString(), et_header.text.toString(), et_body.text.toString())
+
+        note?.let { viewModel.save(it) }
     }
 
     override fun onOptionsItemSelected(item: MenuItem) = when(item.itemId) {
