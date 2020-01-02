@@ -6,8 +6,6 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
-apply plugin: 'com.google.gms.google-services'
-
 androidExtensions {
     experimental = true
 }
@@ -49,7 +47,12 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore:21.3.1'
     implementation 'androidx.multidex:multidex:2.0.1'
 
+    implementation 'com.github.ajalt:timberkt:1.5.1'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
+
+apply plugin: 'com.google.gms.google-services'
+
