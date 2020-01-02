@@ -12,7 +12,6 @@ import com.iashinsergei.notebook.R
 import com.iashinsergei.notebook.data.entity.Note
 import com.iashinsergei.notebook.ui.viewmodels.NoteViewModel
 import kotlinx.android.synthetic.main.activity_note.*
-import kotlinx.android.synthetic.main.app_bar_main.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -45,12 +44,10 @@ class NoteActivity : AppCompatActivity() {
         et_header.removeTextChangedListener(textChangeListener)
         et_body.removeTextChangedListener(textChangeListener)
 
-        note?.let {
-            et_header.setText(it.title)
-            et_body.setText(it.text)
-        } ?:
-        et_header.setText("")
-        et_body.setText("")
+        if (note != null) {
+            et_header.setText(note?.title ?: "")
+            et_body.setText(note?.text ?: "")
+            }
 
         et_header.addTextChangedListener(textChangeListener)
         et_body.addTextChangedListener(textChangeListener)
@@ -83,8 +80,8 @@ class NoteActivity : AppCompatActivity() {
     }
 
     private fun initToolbar() {
-        setSupportActionBar(toolbar)
-        collapsingToolbarLayout.isTitleEnabled = false
+        setSupportActionBar(toolbar_note)
+        collapsingToolbarLayout_note.isTitleEnabled = false
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setToolbarTitle()
     }
