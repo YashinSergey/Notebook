@@ -10,6 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/IrisBlueTheme.NoActionBar"
+        android:name ="androidx.multidex.MultiDexApplication"
         tools:ignore="AllowBackup">
         <activity android:name="com.iashinsergei.notebook.ui.activities.MainActivity">
             <intent-filter>
