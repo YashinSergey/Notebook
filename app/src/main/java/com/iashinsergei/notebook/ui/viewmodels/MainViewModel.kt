@@ -1,22 +1,34 @@
 package com.iashinsergei.notebook.ui.viewmodels
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.Observer
+import com.iashinsergei.notebook.data.NoteResult
 import com.iashinsergei.notebook.data.NotesRepository
+import com.iashinsergei.notebook.data.entity.Note
 import com.iashinsergei.notebook.ui.viewstates.MainViewState
 
-class MainViewModel : ViewModel() {
+class MainViewModel : BaseViewModel<List<Note>?, MainViewState>() {
 
-    private val viewStateLiveData : MutableLiveData<MainViewState> = MutableLiveData()
+    @Suppress("UNCHECKED_CAST")
+    private val notesObserver  = Observer<NoteResult> {
+       it ?: return@Observer
+        when(it) {
+            is NoteResult.Success<*> -> {viewStateLiveData.value = MainViewState(notes = it.data as? List<Note>) }
+            is NoteResult.Error -> {viewStateLiveData.value = MainViewState(error = it.error)}
+        }
+    }
+
+    private val repositoryNotes = NotesRepository.getNotes()
 
     init {
-        NotesRepository.getNotes().observeForever{notes ->
-            notes?.let { viewStateLiveData.value = viewStateLiveData.value?.copy(notes = it)
-                ?: MainViewState(it) }
-        }
+        viewStateLiveData.value = MainViewState()
+        repositoryNotes.observeForever(notesObserver)
     }
 
     fun viewState(): LiveData<MainViewState> = viewStateLiveData
 
+    override fun onCleared() {
+        repositoryNotes.removeObserver(notesObserver)
+        super.onCleared()
+    }
 }
