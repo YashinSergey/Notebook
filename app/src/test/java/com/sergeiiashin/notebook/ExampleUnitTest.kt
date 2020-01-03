@@ -1,4 +1,4 @@
-package com.iashinsergei.notebook
+package com.sergeiiashin.notebook
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

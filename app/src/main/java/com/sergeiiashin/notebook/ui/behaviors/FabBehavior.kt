@@ -1,4 +1,4 @@
-package com.iashinsergei.notebook.ui.behaviors
+package com.sergeiiashin.notebook.ui.behaviors
 
 import android.annotation.SuppressLint
 import android.content.Context

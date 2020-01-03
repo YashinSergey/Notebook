@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.iashinsergei.notebook">
+    package="com.sergeiiashin.notebook">
 
     <application
         android:allowBackup="true"
@@ -10,15 +10,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/IrisBlueTheme.NoActionBar"
+        android:name ="com.sergeiiashin.notebook.App"
         tools:ignore="AllowBackup">
-        <activity android:name="com.iashinsergei.notebook.ui.activities.MainActivity">
+        <activity android:name="com.sergeiiashin.notebook.ui.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activities.NoteActivity" />
+        <activity android:name="com.sergeiiashin.notebook.ui.activities.NoteActivity" />
+        <activity android:name="com.sergeiiashin.notebook.ui.activities.BaseActivity" />
     </application>
 
 </manifest>

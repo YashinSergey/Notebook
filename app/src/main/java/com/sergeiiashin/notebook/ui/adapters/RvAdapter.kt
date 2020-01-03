@@ -1,11 +1,11 @@
-package com.iashinsergei.notebook.ui.adapters
+package com.sergeiiashin.notebook.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.iashinsergei.notebook.R
-import com.iashinsergei.notebook.data.entity.Note
+import com.sergeiiashin.notebook.R
+import com.sergeiiashin.notebook.data.entity.Note
 import kotlinx.android.synthetic.main.note.view.*
 
 class RvAdapter(val onItemClick: ((Note) -> Unit)? = null): RecyclerView.Adapter<RvAdapter.MyViewHolder>() {

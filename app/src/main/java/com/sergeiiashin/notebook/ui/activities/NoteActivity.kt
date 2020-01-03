@@ -1,4 +1,4 @@
-package com.iashinsergei.notebook.ui.activities
+package com.sergeiiashin.notebook.ui.activities
 
 import android.content.Context
 import android.content.Intent
@@ -6,37 +6,39 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
-import com.iashinsergei.notebook.R
-import com.iashinsergei.notebook.data.entity.Note
-import com.iashinsergei.notebook.ui.viewmodels.NoteViewModel
+import com.sergeiiashin.notebook.R
+import com.sergeiiashin.notebook.data.entity.Note
+import com.sergeiiashin.notebook.ui.viewmodels.NoteViewModel
+import com.sergeiiashin.notebook.ui.viewstates.NoteViewState
 import kotlinx.android.synthetic.main.activity_note.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class NoteActivity : AppCompatActivity() {
+class NoteActivity : BaseActivity<Note?, NoteViewState>() {
 
     companion object {
         private val EXTRA_NOTE = NoteActivity::class.java.name + "extra.NOTE"
         private const val DATE_TIME_FORMAT = "DD.MM.YY HH:MM"
-        fun start(context: Context, note: Note? = null){
-            val intent = Intent(context, NoteActivity::class.java)
-            intent.putExtra(EXTRA_NOTE, note)
-            context.startActivity(intent)
+        fun start(context: Context, noteId: String? = null) = Intent(context, NoteActivity::class.java).run {
+            putExtra(EXTRA_NOTE, noteId)
+            context.startActivity(this)
         }
     }
 
     private var note: Note? = null
-    lateinit var viewModel: NoteViewModel
+    override val viewModel: NoteViewModel by lazy { ViewModelProviders.of(this).get(NoteViewModel::class.java)}
+    override val layoutRes: Int = R.layout.activity_note
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_note)
         initToolbar()
 
-        note = intent.getParcelableExtra(EXTRA_NOTE)
-        viewModel = ViewModelProviders.of(this).get(NoteViewModel::class.java)
+        val noteId = intent.getStringExtra(EXTRA_NOTE)
+
+        noteId?.let { viewModel.loadNote(it) }
+            ?: let { supportActionBar?.title = getString(R.string.app_name)}
+
         initViews()
     }
 
@@ -85,7 +87,6 @@ class NoteActivity : AppCompatActivity() {
         setSupportActionBar(toolbar_note)
         collapsingToolbarLayout_note.isTitleEnabled = false
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        setToolbarTitle()
     }
 
     private fun setToolbarTitle() {
@@ -94,5 +95,11 @@ class NoteActivity : AppCompatActivity() {
         } else {
             getString(R.string.app_name)
         }
+    }
+
+    override fun renderData(data: Note?) {
+        this.note = data
+        setToolbarTitle()
+        initViews()
     }
 }

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "725287799573",
+    "firebase_url": "https://notebook-df57c.firebaseio.com",
+    "project_id": "notebook-df57c",
+    "storage_bucket": "notebook-df57c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:725287799573:android:bf06efacda2431387fb71c",
+        "android_client_info": {
+          "package_name": "com.sergeiiashin.notebook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "725287799573-5bbsm0iliufklob766an0p64skcis73o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sergeiiashin.notebook",
+            "certificate_hash": "d5e403bca136f24fcce2999e26d637723e1e6c2b"
+          }
+        },
+        {
+          "client_id": "725287799573-ndp7luv8fkksugbt5pntjsiahirjunuj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCswQGLgSf4elQD-iwc99K02TJIJHbpeiM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "725287799573-ndp7luv8fkksugbt5pntjsiahirjunuj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
