@@ -3,7 +3,7 @@ package com.sergeiiashin.notebook.ui.activities
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.sergeiiashin.notebook.R
 import com.sergeiiashin.notebook.data.entity.Note
 import com.sergeiiashin.notebook.ui.adapters.RvAdapter
@@ -31,7 +31,7 @@ class MainActivity : BaseActivity<List<Note>?, MainViewState>() {
     }
 
     private fun initRecyclerView() {
-        rec_view_notes.layoutManager = GridLayoutManager(this, 2)
+        rec_view_notes.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         adapter = RvAdapter{
             NoteActivity.start(this, it.id)
         }
