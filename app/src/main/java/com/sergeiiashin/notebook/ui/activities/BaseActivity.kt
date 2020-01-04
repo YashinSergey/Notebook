@@ -28,9 +28,9 @@ abstract class BaseActivity<T, S: BaseViewState<T>> : AppCompatActivity() {
 
     abstract fun renderData(data: T)
 
-    protected fun showError(message: String) = Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    private fun showError(message: String) = Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 
-    protected fun renderError(error: Throwable) = error.let {
+    private fun renderError(error: Throwable) = error.let {
         it.message?.let { message ->
             showError(message)
         }
