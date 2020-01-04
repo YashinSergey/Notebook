@@ -46,10 +46,10 @@ class NoteActivity : BaseActivity<Note?, NoteViewState>() {
         et_header.removeTextChangedListener(textChangeListener)
         et_body.removeTextChangedListener(textChangeListener)
 
-        if (note != null) {
-            et_header.setText(note?.title ?: "")
-            et_body.setText(note?.text ?: "")
-            }
+        note?.let {
+            et_header.setText(it.title)
+            et_body.setText(it.text)
+        }
 
         et_header.addTextChangedListener(textChangeListener)
         et_body.addTextChangedListener(textChangeListener)
