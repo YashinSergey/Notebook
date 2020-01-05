@@ -12,15 +12,17 @@
         android:theme="@style/IrisBlueTheme.NoActionBar"
         android:name ="com.sergeiiashin.notebook.App"
         tools:ignore="AllowBackup">
-        <activity android:name="com.sergeiiashin.notebook.ui.activities.MainActivity">
+        <activity android:name="com.sergeiiashin.notebook.ui.activities.MainActivity"/>
+        <activity android:name="com.sergeiiashin.notebook.ui.activities.NoteActivity" />
+        <activity android:name="com.sergeiiashin.notebook.ui.activities.BaseActivity" />
+        <activity android:name=".ui.activities.SplashActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.sergeiiashin.notebook.ui.activities.NoteActivity" />
-        <activity android:name="com.sergeiiashin.notebook.ui.activities.BaseActivity" />
     </application>
 
 </manifest>
