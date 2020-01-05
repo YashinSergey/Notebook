@@ -8,11 +8,11 @@ import android.text.TextWatcher
 import android.view.MenuItem
 import androidx.lifecycle.ViewModelProviders
 import com.sergeiiashin.notebook.R
+import com.sergeiiashin.notebook.common.format
 import com.sergeiiashin.notebook.data.entity.Note
 import com.sergeiiashin.notebook.ui.viewmodels.NoteViewModel
 import com.sergeiiashin.notebook.ui.viewstates.NoteViewState
 import kotlinx.android.synthetic.main.activity_note.*
-import java.text.SimpleDateFormat
 import java.util.*
 
 class NoteActivity : BaseActivity<Note?, NoteViewState>() {
@@ -46,10 +46,10 @@ class NoteActivity : BaseActivity<Note?, NoteViewState>() {
         et_header.removeTextChangedListener(textChangeListener)
         et_body.removeTextChangedListener(textChangeListener)
 
-        if (note != null) {
-            et_header.setText(note?.title ?: "")
-            et_body.setText(note?.text ?: "")
-            }
+        note?.let {
+            et_header.setText(it.title)
+            et_body.setText(it.text)
+        }
 
         et_header.addTextChangedListener(textChangeListener)
         et_body.addTextChangedListener(textChangeListener)
@@ -89,17 +89,9 @@ class NoteActivity : BaseActivity<Note?, NoteViewState>() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    private fun setToolbarTitle() {
-        supportActionBar?.title = if (note != null) {
-            SimpleDateFormat(DATE_TIME_FORMAT, Locale.getDefault()).format(note!!.lastChanged)
-        } else {
-            getString(R.string.app_name)
-        }
-    }
-
     override fun renderData(data: Note?) {
         this.note = data
-        setToolbarTitle()
+        supportActionBar?.title = note?.lastChanged?.format(DATE_TIME_FORMAT) ?: getString(R.string.app_name)
         initViews()
     }
 }

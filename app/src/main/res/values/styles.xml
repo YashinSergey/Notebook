@@ -89,4 +89,17 @@
     <style name="DarkTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="DarkTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="LoginStyle" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/iris_blue</item>
+        <item name="colorPrimaryDark">@color/bondi_blue</item>
+        <item name="colorAccent">@color/medium_slate_blue</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 </resources>

@@ -2,4 +2,9 @@
     <string name="app_name">Notebook</string>
     <string name="header">Header</string>
     <string name="body">Body</string>
+    <string name="logout_dialog_title">Logout</string>
+    <string name="logout_dialog_message">Do you want to logout?</string>
+    <string name="logout_dialog_positiv">OK</string>
+    <string name="logout_dialog_negative">Cancel</string>
+    <string name="menu_main_title_logout">Logout</string>
 </resources>
