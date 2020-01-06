@@ -6,13 +6,13 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.MenuItem
-import androidx.lifecycle.ViewModelProviders
 import com.sergeiiashin.notebook.R
 import com.sergeiiashin.notebook.common.format
 import com.sergeiiashin.notebook.data.entity.Note
 import com.sergeiiashin.notebook.ui.viewmodels.NoteViewModel
 import com.sergeiiashin.notebook.ui.viewstates.NoteViewState
 import kotlinx.android.synthetic.main.activity_note.*
+import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
 
 class NoteActivity : BaseActivity<Note?, NoteViewState>() {
@@ -27,7 +27,7 @@ class NoteActivity : BaseActivity<Note?, NoteViewState>() {
     }
 
     private var note: Note? = null
-    override val viewModel: NoteViewModel by lazy { ViewModelProviders.of(this).get(NoteViewModel::class.java)}
+    override val model: NoteViewModel by viewModel()
     override val layoutRes: Int = R.layout.activity_note
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +36,7 @@ class NoteActivity : BaseActivity<Note?, NoteViewState>() {
 
         val noteId = intent.getStringExtra(EXTRA_NOTE)
 
-        noteId?.let { viewModel.loadNote(it) }
+        noteId?.let { model.loadNote(it) }
             ?: let { supportActionBar?.title = getString(R.string.app_name)}
 
         initViews()
@@ -72,7 +72,7 @@ class NoteActivity : BaseActivity<Note?, NoteViewState>() {
             lastChanged = Date()
         ) ?: Note(UUID.randomUUID().toString(), et_header.text.toString(), et_body.text.toString())
 
-        note?.let { viewModel.save(it) }
+        note?.let { model.save(it) }
     }
 
     override fun onOptionsItemSelected(item: MenuItem) = when(item.itemId) {
@@ -91,7 +91,7 @@ class NoteActivity : BaseActivity<Note?, NoteViewState>() {
 
     override fun renderData(data: Note?) {
         this.note = data
-        supportActionBar?.title = "Last change: " + note?.lastChanged?.format(DATE_TIME_FORMAT) ?: getString(R.string.app_name)
+        supportActionBar?.title = note?.lastChanged?.format(DATE_TIME_FORMAT) ?: getString(R.string.app_name)
         initViews()
     }
 }

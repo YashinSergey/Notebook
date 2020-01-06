@@ -5,7 +5,7 @@ import com.sergeiiashin.notebook.data.NotesRepository
 import com.sergeiiashin.notebook.data.entity.Note
 import com.sergeiiashin.notebook.ui.viewstates.NoteViewState
 
-class NoteViewModel : BaseViewModel<Note?, NoteViewState>() {
+class NoteViewModel(private val notesRepository: NotesRepository) : BaseViewModel<Note?, NoteViewState>() {
 
     init {
         viewStateLiveData.value = NoteViewState()
@@ -19,12 +19,12 @@ class NoteViewModel : BaseViewModel<Note?, NoteViewState>() {
 
     override fun onCleared() {
         pendingNote?.let {
-            NotesRepository.saveNote(it)
+            notesRepository.saveNote(it)
         }
     }
 
     fun loadNote(id: String) {
-        NotesRepository.getNoteById(id).observeForever {
+        notesRepository.getNoteById(id).observeForever {
             it?: return@observeForever
             when(it) {
                 is NoteResult.Success<*> -> viewStateLiveData.value = NoteViewState(note = it.data as? Note)

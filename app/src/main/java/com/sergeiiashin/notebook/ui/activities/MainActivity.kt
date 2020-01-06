@@ -7,7 +7,6 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.firebase.ui.auth.AuthUI
 import com.sergeiiashin.notebook.R
@@ -17,6 +16,7 @@ import com.sergeiiashin.notebook.ui.fragments.LogoutDialog
 import com.sergeiiashin.notebook.ui.viewmodels.MainViewModel
 import com.sergeiiashin.notebook.ui.viewstates.MainViewState
 import kotlinx.android.synthetic.main.app_bar_main.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity<List<Note>?, MainViewState>(), LogoutDialog.LogoutListener {
 
@@ -27,7 +27,7 @@ class MainActivity : BaseActivity<List<Note>?, MainViewState>(), LogoutDialog.Lo
     }
 
     lateinit var adapter: RvAdapter
-    override val viewModel: MainViewModel by lazy { ViewModelProviders.of(this).get(MainViewModel::class.java)}
+    override val model: MainViewModel by viewModel()
     override val layoutRes: Int = R.layout.activity_main
 
     override fun onCreate(savedInstanceState: Bundle?) {
