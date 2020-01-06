@@ -12,13 +12,13 @@ import com.firebase.ui.auth.AuthUI
 import com.sergeiiashin.notebook.R
 import com.sergeiiashin.notebook.data.entity.Note
 import com.sergeiiashin.notebook.ui.adapters.RvAdapter
-import com.sergeiiashin.notebook.ui.fragments.LogoutDialog
 import com.sergeiiashin.notebook.ui.viewmodels.MainViewModel
 import com.sergeiiashin.notebook.ui.viewstates.MainViewState
 import kotlinx.android.synthetic.main.app_bar_main.*
+import org.jetbrains.anko.alert
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class MainActivity : BaseActivity<List<Note>?, MainViewState>(), LogoutDialog.LogoutListener {
+class MainActivity : BaseActivity<List<Note>?, MainViewState>() {
 
     companion object {
         fun start(context: Context) = Intent(context, MainActivity::class.java).run {
@@ -48,8 +48,12 @@ class MainActivity : BaseActivity<List<Note>?, MainViewState>(), LogoutDialog.Lo
     }
 
     private fun showLogoutDialog() {
-        supportFragmentManager.findFragmentByTag(LogoutDialog.TAG)
-            ?: LogoutDialog.createInstance().show(supportFragmentManager, LogoutDialog.TAG)
+        alert {
+            titleResource = R.string.logout_dialog_title
+            messageResource = R.string.logout_dialog_message
+            positiveButton(R.string.logout_dialog_positiv) {onLogout()}
+            negativeButton(R.string.logout_dialog_negative) {dialog -> dialog.dismiss() }
+        }.show()
     }
 
     private fun fubClickListener() = View.OnClickListener {
@@ -76,7 +80,7 @@ class MainActivity : BaseActivity<List<Note>?, MainViewState>(), LogoutDialog.Lo
         }
     }
 
-    override fun onLogout() {
+    private fun onLogout() {
        AuthUI.getInstance().signOut(this).addOnCompleteListener {
            startActivity(Intent(this, SplashActivity::class.java))
            finish()
