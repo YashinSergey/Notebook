@@ -27,7 +27,7 @@ class RvAdapter(val onItemClick: ((Note) -> Unit)? = null): RecyclerView.Adapter
     }
 
 
-    inner class MyViewHolder(itemView: View, override val containerView: View?): RecyclerView.ViewHolder(itemView), LayoutContainer {
+    inner class MyViewHolder(override val containerView: View): RecyclerView.ViewHolder(containerView), LayoutContainer {
 
         fun bind(note: Note) = with(itemView) {
             tv_note_title.text = note.title
