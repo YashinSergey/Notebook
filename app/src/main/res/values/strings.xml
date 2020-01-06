@@ -7,4 +7,5 @@
     <string name="logout_dialog_positiv">OK</string>
     <string name="logout_dialog_negative">Cancel</string>
     <string name="menu_main_title_logout">Logout</string>
+    <string name="menu_note_title_delete">Delete</string>
 </resources>
