@@ -19,7 +19,7 @@ class NoteActivity : BaseActivity<Note?, NoteViewState>() {
 
     companion object {
         private val EXTRA_NOTE = NoteActivity::class.java.name + "extra.NOTE"
-        private const val DATE_TIME_FORMAT = "DD.MM.YY HH:MM"
+        private const val DATE_TIME_FORMAT = "DD.MM.YY"
         fun start(context: Context, noteId: String? = null) = Intent(context, NoteActivity::class.java).run {
             putExtra(EXTRA_NOTE, noteId)
             context.startActivity(this)
@@ -91,7 +91,7 @@ class NoteActivity : BaseActivity<Note?, NoteViewState>() {
 
     override fun renderData(data: Note?) {
         this.note = data
-        supportActionBar?.title = note?.lastChanged?.format(DATE_TIME_FORMAT) ?: getString(R.string.app_name)
+        supportActionBar?.title = "Last change: " + note?.lastChanged?.format(DATE_TIME_FORMAT) ?: getString(R.string.app_name)
         initViews()
     }
 }
