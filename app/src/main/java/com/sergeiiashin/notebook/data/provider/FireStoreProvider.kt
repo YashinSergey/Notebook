@@ -74,4 +74,18 @@ class FireStoreProvider(private val fbAuth: FirebaseAuth, private val store: Fir
             value = NoteResult.Error(e)
         }
     }
+
+    override fun deleteNote(noteId: String)= MutableLiveData<NoteResult>().apply {
+        try {
+            getUserNotesCollection().document(noteId).delete().addOnSuccessListener {
+                Timber.d { "Note ${getNoteById(noteId)} is deleted" }
+                value = NoteResult.Success(null)
+            }.addOnFailureListener { error ->
+                Timber.d { "Deleted note error, message: ${error.message}" }
+                value = NoteResult.Error(error)
+            }
+        } catch (e: Throwable) {
+            value = NoteResult.Error(e)
+        }
+    }
 }
