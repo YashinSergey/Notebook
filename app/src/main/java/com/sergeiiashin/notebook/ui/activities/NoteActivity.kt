@@ -50,8 +50,12 @@ class NoteActivity : BaseActivity<NoteViewState.Data, NoteViewState>() {
         et_body.removeTextChangedListener(textChangeListener)
 
         note?.let {
-            et_header.setText(it.title)
-            et_body.setText(it.text)
+            if(et_header.text.toString() != it.title){
+                et_header.setText(it.title)
+            }
+            if(et_body.text.toString() != it.text){
+                et_body.setText(it.text)
+            }
             supportActionBar?.title = note?.lastChanged?.format(DATE_TIME_FORMAT)
         } ?: let {
             supportActionBar?.title =  getString(R.string.app_name)
