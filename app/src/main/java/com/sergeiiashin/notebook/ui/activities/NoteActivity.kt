@@ -5,21 +5,24 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.MenuItem
-import androidx.lifecycle.ViewModelProviders
 import com.sergeiiashin.notebook.R
 import com.sergeiiashin.notebook.common.format
 import com.sergeiiashin.notebook.data.entity.Note
 import com.sergeiiashin.notebook.ui.viewmodels.NoteViewModel
 import com.sergeiiashin.notebook.ui.viewstates.NoteViewState
 import kotlinx.android.synthetic.main.activity_note.*
+import org.jetbrains.anko.alert
+import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
 
-class NoteActivity : BaseActivity<Note?, NoteViewState>() {
+class NoteActivity : BaseActivity<NoteViewState.Data, NoteViewState>() {
 
     companion object {
         private val EXTRA_NOTE = NoteActivity::class.java.name + "extra.NOTE"
-        private const val DATE_TIME_FORMAT = "DD.MM.YY HH:MM"
+        private const val DATE_TIME_FORMAT = "DD.MM.YY"
         fun start(context: Context, noteId: String? = null) = Intent(context, NoteActivity::class.java).run {
             putExtra(EXTRA_NOTE, noteId)
             context.startActivity(this)
@@ -27,7 +30,7 @@ class NoteActivity : BaseActivity<Note?, NoteViewState>() {
     }
 
     private var note: Note? = null
-    override val viewModel: NoteViewModel by lazy { ViewModelProviders.of(this).get(NoteViewModel::class.java)}
+    override val model: NoteViewModel by viewModel()
     override val layoutRes: Int = R.layout.activity_note
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +39,7 @@ class NoteActivity : BaseActivity<Note?, NoteViewState>() {
 
         val noteId = intent.getStringExtra(EXTRA_NOTE)
 
-        noteId?.let { viewModel.loadNote(it) }
+        noteId?.let { model.loadNote(it) }
             ?: let { supportActionBar?.title = getString(R.string.app_name)}
 
         initViews()
@@ -47,8 +50,15 @@ class NoteActivity : BaseActivity<Note?, NoteViewState>() {
         et_body.removeTextChangedListener(textChangeListener)
 
         note?.let {
-            et_header.setText(it.title)
-            et_body.setText(it.text)
+            if(et_header.text.toString() != it.title){
+                et_header.setText(it.title)
+            }
+            if(et_body.text.toString() != it.text){
+                et_body.setText(it.text)
+            }
+            supportActionBar?.title = note?.lastChanged?.format(DATE_TIME_FORMAT)
+        } ?: let {
+            supportActionBar?.title =  getString(R.string.app_name)
         }
 
         et_header.addTextChangedListener(textChangeListener)
@@ -72,14 +82,15 @@ class NoteActivity : BaseActivity<Note?, NoteViewState>() {
             lastChanged = Date()
         ) ?: Note(UUID.randomUUID().toString(), et_header.text.toString(), et_body.text.toString())
 
-        note?.let { viewModel.save(it) }
+        note?.let { model.save(it) }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem) = when(item.itemId) {
-        android.R.id.home -> {
-            onBackPressed()
-            true
-        }
+    override fun onCreateOptionsMenu(menu: Menu) = MenuInflater(this)
+        .inflate(R.menu.menu_note, menu).let { true }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId) {
+        android.R.id.home -> onBackPressed().let { true }
+        R.id.delete -> deleteNote().let { true }
         else -> super.onOptionsItemSelected(item)
     }
 
@@ -89,9 +100,20 @@ class NoteActivity : BaseActivity<Note?, NoteViewState>() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    override fun renderData(data: Note?) {
-        this.note = data
-        supportActionBar?.title = note?.lastChanged?.format(DATE_TIME_FORMAT) ?: getString(R.string.app_name)
+    override fun renderData(data: NoteViewState.Data) {
+        if (data.isDeleted) {
+            finish()
+            return
+        }
+        this.note = data.note
         initViews()
+    }
+
+    private fun deleteNote() {
+        alert {
+            messageResource = R.string.note_delete_message
+            negativeButton(R.string.note_delete_cancel) {dialog -> dialog.dismiss() }
+            positiveButton(R.string.note_delete_ok) {model.deleteNote()}
+        }.show()
     }
 }

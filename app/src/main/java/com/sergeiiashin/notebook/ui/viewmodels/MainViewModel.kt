@@ -7,7 +7,7 @@ import com.sergeiiashin.notebook.data.NotesRepository
 import com.sergeiiashin.notebook.data.entity.Note
 import com.sergeiiashin.notebook.ui.viewstates.MainViewState
 
-class MainViewModel : BaseViewModel<List<Note>?, MainViewState>() {
+class MainViewModel(notesRepository: NotesRepository) : BaseViewModel<List<Note>?, MainViewState>() {
 
     @Suppress("UNCHECKED_CAST")
     private val notesObserver  = Observer<NoteResult> {
@@ -18,7 +18,7 @@ class MainViewModel : BaseViewModel<List<Note>?, MainViewState>() {
         }
     }
 
-    private val repositoryNotes = NotesRepository.getNotes()
+    private val repositoryNotes = notesRepository.getNotes()
 
     init {
         viewStateLiveData.value = MainViewState()

@@ -10,16 +10,15 @@ import com.sergeiiashin.notebook.data.entity.Note
 import com.sergeiiashin.notebook.data.entity.User
 import com.sergeiiashin.notebook.data.exceptions.NoAuthException
 
-class FireStoreProvider : RemoteDataProvider {
+class FireStoreProvider(private val fbAuth: FirebaseAuth, private val store: FirebaseFirestore) : RemoteDataProvider {
 
     companion object {
         private const val NOTES_COLLECTION = "notes"
         private const val USERS_COLLECTION = "users"
     }
 
-    private val fireStore by lazy { FirebaseFirestore.getInstance() }
     private val currentUser
-        get() = FirebaseAuth.getInstance().currentUser
+        get() = fbAuth.currentUser
 
     override fun getCurrentUser() = MutableLiveData<User?>().apply{
         value = currentUser?.let {
@@ -28,7 +27,7 @@ class FireStoreProvider : RemoteDataProvider {
     }
 
     private fun getUserNotesCollection() = currentUser?.let {
-        fireStore.collection(USERS_COLLECTION).document(it.uid).collection(NOTES_COLLECTION)
+        store.collection(USERS_COLLECTION).document(it.uid).collection(NOTES_COLLECTION)
     } ?: throw NoAuthException()
 
     override fun subscribeToAllNotes() = MutableLiveData<NoteResult>().apply {
@@ -69,6 +68,20 @@ class FireStoreProvider : RemoteDataProvider {
                 value = NoteResult.Success(note)
             }.addOnFailureListener { error ->
                 Timber.d { "Saving note error, message: ${error.message}" }
+                value = NoteResult.Error(error)
+            }
+        } catch (e: Throwable) {
+            value = NoteResult.Error(e)
+        }
+    }
+
+    override fun deleteNote(noteId: String)= MutableLiveData<NoteResult>().apply {
+        try {
+            getUserNotesCollection().document(noteId).delete().addOnSuccessListener {
+                Timber.d { "Note ${getNoteById(noteId)} is deleted" }
+                value = NoteResult.Success(null)
+            }.addOnFailureListener { error ->
+                Timber.d { "Deleted note error, message: ${error.message}" }
                 value = NoteResult.Error(error)
             }
         } catch (e: Throwable) {

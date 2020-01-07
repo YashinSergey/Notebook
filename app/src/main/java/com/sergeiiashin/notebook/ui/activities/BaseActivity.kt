@@ -18,14 +18,14 @@ abstract class BaseActivity<T, S: BaseViewState<T>> : AppCompatActivity() {
         private const val SIGN_IN = 7531
     }
 
-    abstract val viewModel: BaseViewModel<T, S>
+    abstract val model: BaseViewModel<T, S>
     abstract val layoutRes: Int?
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         layoutRes?.let { setContentView(it) }
 
-        viewModel.getViewState().observe(this, Observer<S> {
+        model.getViewState().observe(this, Observer<S> {
             it ?: return@Observer
             it.error?.let { error ->
                 renderError(error)
