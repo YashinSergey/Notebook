@@ -13,21 +13,22 @@ import com.sergeiiashin.notebook.R
 import com.sergeiiashin.notebook.data.entity.Note
 import com.sergeiiashin.notebook.ui.adapters.RvAdapter
 import com.sergeiiashin.notebook.ui.viewmodels.MainViewModel
-import com.sergeiiashin.notebook.ui.viewstates.MainViewState
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.jetbrains.anko.alert
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class MainActivity : BaseActivity<List<Note>?, MainViewState>() {
+@ExperimentalCoroutinesApi
+class MainActivity : BaseActivity<List<Note>?>() {
 
+    override val model: MainViewModel by viewModel()
     companion object {
         fun start(context: Context) = Intent(context, MainActivity::class.java).run {
             context.startActivity(this)
         }
-    }
 
+    }
     lateinit var adapter: RvAdapter
-    override val model: MainViewModel by viewModel()
     override val layoutRes: Int = R.layout.activity_main
 
     override fun onCreate(savedInstanceState: Bundle?) {

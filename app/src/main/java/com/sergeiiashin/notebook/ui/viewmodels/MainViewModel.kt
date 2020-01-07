@@ -1,34 +1,31 @@
 package com.sergeiiashin.notebook.ui.viewmodels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import com.sergeiiashin.notebook.data.NoteResult
 import com.sergeiiashin.notebook.data.NotesRepository
 import com.sergeiiashin.notebook.data.entity.Note
-import com.sergeiiashin.notebook.ui.viewstates.MainViewState
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.channels.consumeEach
+import kotlinx.coroutines.launch
 
-class MainViewModel(notesRepository: NotesRepository) : BaseViewModel<List<Note>?, MainViewState>() {
+@ExperimentalCoroutinesApi
+class MainViewModel(notesRepository: NotesRepository) : BaseViewModel<List<Note>?>() {
 
-    @Suppress("UNCHECKED_CAST")
-    private val notesObserver  = Observer<NoteResult> {
-       it ?: return@Observer
-        when(it) {
-            is NoteResult.Success<*> -> {viewStateLiveData.value = MainViewState(notes = it.data as? List<Note>) }
-            is NoteResult.Error -> {viewStateLiveData.value = MainViewState(error = it.error)}
+    private val notesChannel = notesRepository.getNotes()
+
+    init {
+        launch {
+            notesChannel.consumeEach {
+                @Suppress("UNCHECKED_CAST")
+                when(it) {
+                    is NoteResult.Success<*> -> setData(it.data as? List<Note>)
+                    is NoteResult.Error -> setError(it.error)
+                }
+            }
         }
     }
 
-    private val repositoryNotes = notesRepository.getNotes()
-
-    init {
-        viewStateLiveData.value = MainViewState()
-        repositoryNotes.observeForever(notesObserver)
-    }
-
-    fun viewState(): LiveData<MainViewState> = viewStateLiveData
-
     override fun onCleared() {
-        repositoryNotes.removeObserver(notesObserver)
+        notesChannel.cancel()
         super.onCleared()
     }
 }

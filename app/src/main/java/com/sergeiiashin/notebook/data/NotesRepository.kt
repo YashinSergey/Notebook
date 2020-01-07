@@ -6,8 +6,8 @@ import com.sergeiiashin.notebook.data.provider.RemoteDataProvider
 class NotesRepository(private val remoteDataProvider: RemoteDataProvider)  {
 
     fun getNotes() = remoteDataProvider.subscribeToAllNotes()
-    fun getNoteById(id: String) = remoteDataProvider.getNoteById(id)
-    fun saveNote(note: Note) = remoteDataProvider.saveNote(note)
-    fun getCurrentUser() = remoteDataProvider.getCurrentUser()
-    fun deleteNote(noteId: String) = remoteDataProvider.deleteNote(noteId)
+    suspend fun getNoteById(id: String) = remoteDataProvider.getNoteById(id)
+    suspend fun saveNote(note: Note) = remoteDataProvider.saveNote(note)
+    suspend fun getCurrentUser() = remoteDataProvider.getCurrentUser()
+    suspend fun deleteNote(noteId: String) = remoteDataProvider.deleteNote(noteId)
 }

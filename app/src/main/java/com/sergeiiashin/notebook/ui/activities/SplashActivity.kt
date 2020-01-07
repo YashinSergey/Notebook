@@ -1,10 +1,11 @@
 package com.sergeiiashin.notebook.ui.activities
 
 import com.sergeiiashin.notebook.ui.viewmodels.SplashViewModel
-import com.sergeiiashin.notebook.ui.viewstates.SplashViewState
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class SplashActivity: BaseActivity<Boolean?, SplashViewState>() {
+@ExperimentalCoroutinesApi
+class SplashActivity: BaseActivity<Boolean?>() {
 
     override val model: SplashViewModel by viewModel()
     override val layoutRes: Int? = null
