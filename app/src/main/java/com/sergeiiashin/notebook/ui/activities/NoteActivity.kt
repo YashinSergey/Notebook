@@ -12,13 +12,15 @@ import com.sergeiiashin.notebook.R
 import com.sergeiiashin.notebook.common.format
 import com.sergeiiashin.notebook.data.entity.Note
 import com.sergeiiashin.notebook.ui.viewmodels.NoteViewModel
-import com.sergeiiashin.notebook.ui.viewstates.NoteViewState
+import com.sergeiiashin.notebook.ui.viewstates.NoteData
 import kotlinx.android.synthetic.main.activity_note.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.jetbrains.anko.alert
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
 
-class NoteActivity : BaseActivity<NoteViewState.Data, NoteViewState>() {
+@ExperimentalCoroutinesApi
+class NoteActivity : BaseActivity<NoteData>() {
 
     companion object {
         private val EXTRA_NOTE = NoteActivity::class.java.name + "extra.NOTE"
@@ -100,7 +102,7 @@ class NoteActivity : BaseActivity<NoteViewState.Data, NoteViewState>() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    override fun renderData(data: NoteViewState.Data) {
+    override fun renderData(data: NoteData) {
         if (data.isDeleted) {
             finish()
             return
